@@ -86,13 +86,30 @@
       height: auto;
       display: block;
       margin: 0 auto;
-      padding-top: 40px;
+      padding-top: 20px;
     }
 
     .card p {
       padding: 15px;
       font-size: 1rem;
       text-align: center;
+    }
+
+    /* === Instruction Text (Grid上) === */
+    .instruction {
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 20px 0;
+      color: #333;
+    }
+
+    /* === Footer (一番下) === */
+    footer {
+      background: black;
+      color: white;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 15px;
     }
   </style>
 </head>
@@ -116,6 +133,11 @@
     </div>
   </div>
 
+  <!-- Instruction Text -->
+  <div class="instruction">
+    Tap a flag below to read the article.
+  </div>
+
   <!-- Grid Section -->
   <div class="grid">
     <div class="card">
@@ -133,7 +155,7 @@
       <p>Singapore</p>
     </div>
     <div class="card">
-      <a href="" us.html>
+      <a href="us.html">
         <img src="https://flagcdn.com/128x96/us.png" srcset="https://flagcdn.com/256x192/us.png 2x" width="128"
           height="96" alt="アメリカ合衆国">
       </a>
@@ -147,6 +169,12 @@
       <p>Japan</p>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    This website was created for learning English.  
+    If you find any mistakes in grammar or context, I’d be grateful if you could let me know.
+  </footer>
 
   <script>
     const slides = document.querySelectorAll('.slide');
