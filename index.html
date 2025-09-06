@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>it's mine.</title>
   <style>
-    body { margin: 0; font-family: 'Helvetica Neue', sans-serif; }
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
 
     /* === Hero Section (スライドショー) === */
     .hero {
@@ -13,6 +17,7 @@
       height: 100vh;
       overflow: hidden;
     }
+
     .slide {
       position: absolute;
       width: 100%;
@@ -21,9 +26,11 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
+
     .slide.active {
       opacity: 1;
     }
+
     .hero-content {
       position: absolute;
       top: 50%;
@@ -33,16 +40,19 @@
       text-align: center;
       z-index: 10;
     }
+
     .hero-content h1 {
       font-size: 3rem;
       margin: 0;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
     }
+
     .hero-content p {
       font-size: 1.2rem;
       margin: 20px 0;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
     }
+
     .btn {
       background: white;
       color: black;
@@ -60,19 +70,29 @@
       padding: 40px;
       background: #f7f7f7;
     }
+
     .card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .card img { width: 100%; height: auto; }
-    .card p { padding: 15px; font-size: 1rem; }
+
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .card p {
+      padding: 15px;
+      font-size: 1rem;
+    }
   </style>
 </head>
+
 <body>
   <!-- Hero Section -->
   <div class="hero">
@@ -95,19 +115,27 @@
   <!-- Grid Section -->
   <div class="grid">
     <div class="card">
-      <img src="uk.jpg" alt="">
+      <a href="uk.html">
+        <img src="uk.jpg" alt="">
+      </a>
       <p>United Kingdom</p>
     </div>
     <div class="card">
-      <img src="sp.jpg" alt="">
+      <a href="sp.html">
+        <img src="sp.jpg" alt="">
+      </a>
       <p>Singapore</p>
     </div>
     <div class="card">
-      <img src="us.jpg" alt="">
+      <a href="" us.html>
+        <img src="us.jpg" alt="">
+      </a>
       <p>United States</p>
     </div>
     <div class="card">
-      <img src="japan.jpg" alt="">
+      <a href="japan.html">
+        <img src="japan.jpg" alt="">
+      </a>
       <p>Japan</p>
     </div>
   </div>
@@ -125,4 +153,5 @@
     setInterval(showNextSlide, 2000); // 2秒ごとに切り替え
   </script>
 </body>
+
 </html>
