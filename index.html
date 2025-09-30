@@ -9,6 +9,9 @@
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* === Hero Section (スライドショー) === */
@@ -62,7 +65,15 @@
       font-weight: bold;
     }
 
-    /* === Grid Section (下の4つ) === */
+    /* === Instruction Text === */
+    .instruction {
+      text-align: center;
+      font-size: 1.3rem;
+      margin: 20px 0;
+      color: #333;
+    }
+
+    /* === Grid Section === */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -95,21 +106,23 @@
       text-align: center;
     }
 
-    /* === Instruction Text (Grid上) === */
-    .instruction {
+    /* === Recommendation Section === */
+    .recommendation {
+      padding: 40px;
+      background: #eef5ff;
       text-align: center;
-      font-size: 1.3rem;
-      margin: 20px 0;
-      color: #333;
+      border-radius: 12px;
+      margin: 40px;
     }
 
-    /* === Footer (一番下) === */
+    /* === Footer === */
     footer {
       background: black;
       color: white;
       font-size: 0.8rem;
       text-align: center;
       padding: 30px;
+      margin-top: auto;
     }
   </style>
 </head>
@@ -117,7 +130,6 @@
 <body>
   <!-- Hero Section -->
   <div class="hero">
-    <!-- スライド画像（7枚） -->
     <img src="img1.jpg" class="slide active">
     <img src="img2.jpg" class="slide">
     <img src="img3.jpg" class="slide">
@@ -126,58 +138,83 @@
     <img src="img6.jpg" class="slide">
     <img src="img7.jpg" class="slide">
 
-    <!-- 中央のテキスト -->
     <div class="hero-content">
       <h1>UNFOLDING STORIES</h1>
       <p>Notes, doodles, and random sparks that express my true self.</p>
     </div>
   </div>
 
-  <!-- Instruction Text -->
-
+  <!-- Instruction -->
+  <div class="instruction">
+    Tap a flag below to read the article.
+  </div>
 
   <!-- Grid Section -->
   <div class="grid">
-    <div class="instruction">
-      Tap a flag below to read the article.
-    </div>
     <div class="card">
       <a href="uk.html">
         <img src="https://flagcdn.com/128x96/gb.png" srcset="https://flagcdn.com/256x192/gb.png 2x" width="128"
-          height="96" alt="イギリス">
+          height="96" alt="Flag of the United Kingdom">
       </a>
       <p>United Kingdom</p>
     </div>
     <div class="card">
       <a href="sp.html">
         <img src="https://flagcdn.com/128x96/sg.png" srcset="https://flagcdn.com/256x192/sg.png 2x" width="128"
-          height="96" alt="シンガポール">
+          height="96" alt="Flag of Singapore">
       </a>
       <p>Singapore</p>
     </div>
     <div class="card">
       <a href="us.html">
         <img src="https://flagcdn.com/128x96/us.png" srcset="https://flagcdn.com/256x192/us.png 2x" width="128"
-          height="96" alt="アメリカ合衆国">
+          height="96" alt="Flag of the United States">
       </a>
       <p>United States</p>
     </div>
     <div class="card">
       <a href="japan.html">
         <img src="https://flagcdn.com/128x96/jp.png" srcset="https://flagcdn.com/256x192/jp.png 2x" width="128"
-          height="96" alt="日本">
+          height="96" alt="Flag of Japan">
       </a>
       <p>Japan</p>
     </div>
+  </div>
+
+  <!-- Recommendation Section -->
+  <div class="recommendation">
+    <h2>Find Your Next Travel Destination</h2>
+    <form id="recommendForm">
+      <label>Region:
+        <select id="region">
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+          <option value="america">America</option>
+        </select>
+      </label>
+      <br><br>
+      <label>Safety (1=low, 3=high):
+        <input type="number" id="safety" min="1" max="3" value="2">
+      </label>
+      <br><br>
+      <label>Food (1=poor, 3=great):
+        <input type="number" id="food" min="1" max="3" value="2">
+      </label>
+      <br><br>
+      <button type="submit">Recommend</button>
+    </form>
+    <div id="result" style="margin-top:20px; font-size:1.2rem; font-weight:bold;"></div>
   </div>
 
   <!-- Footer -->
   <footer>
     This website was created for learning English.
     If you have any opinions and suggestions, I’d be grateful if you could let me know.
+    The recommended travel destinations are based on personal judgment and preferences, and should not be considered definitive.
   </footer>
 
   <script>
+    // === Slideshow ===
     const slides = document.querySelectorAll('.slide');
     let current = 0;
 
@@ -186,8 +223,64 @@
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
     }
+    setInterval(showNextSlide, 4000);
 
-    setInterval(showNextSlide, 2000); // 2秒ごとに切り替え
+    // === Recommendation System ===
+    document.getElementById("recommendForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const region = document.getElementById("region").value;
+      const safety = parseInt(document.getElementById("safety").value);
+      const food = parseInt(document.getElementById("food").value);
+
+      const countries = [
+        { name: "Japan", region: "asia", safety: 3, food: 3 },
+        { name: "Korea", region: "asia", safety: 3, food: 2 },
+        { name: "Singapore", region: "asia", safety: 3, food: 1 },
+        { name: "Thailand", region: "asia", safety: 2, food: 3 },
+        { name: "Malaysia", region: "asia", safety: 2, food: 2 },
+        { name: "Vietnam", region: "asia", safety: 2, food: 1 },
+        { name: "India", region: "asia", safety: 1, food: 3 },
+        { name: "Pakistan", region: "asia", safety: 1, food: 2 },
+        { name: "Afghanistan", region: "asia", safety: 1, food: 1 },
+        { name: "Canada", region: "america", safety: 3, food: 3 },
+        { name: "Chile", region: "america", safety: 3, food: 2 },
+        { name: "Uruguay", region: "america", safety: 3, food: 1 },
+        { name: "Peru", region: "america", safety: 2, food: 3 },
+        { name: "United States", region: "america", safety: 2, food: 2 },
+        { name: "Columbia", region: "america", safety: 2, food: 1 },
+        { name: "Mexico", region: "america", safety: 1, food: 3 },
+        { name: "Venezuela", region: "america", safety: 1, food: 2 },
+        { name: "Haiti", region: "america", safety: 1, food: 1 },
+        { name: "Switzerland", region: "europe", safety: 3, food: 3 },
+        { name: "Sweden", region: "europe", safety: 3, food: 2 },
+        { name: "Norway", region: "europe", safety: 3, food: 1 },
+        { name: "France", region: "europe", safety: 2, food: 3 },
+        { name: "Germany", region: "europe", safety: 2, food: 2 },
+        { name: "United Kingdom", region: "europe", safety: 2, food: 1 },
+        { name: "Russia", region: "europe", safety: 1, food: 3 },
+        { name: "Ukraine", region: "europe", safety: 1, food: 2 },
+        { name: "Kosovo", region: "europe", safety: 1, food: 1 }
+      ];
+
+      let bestCountry = null;
+      let bestScore = -1;
+
+      countries.forEach(c => {
+        let score = 0;
+        if (c.region === region) score += 2;
+        score += (3 - Math.abs(c.safety - safety));
+        score += (3 - Math.abs(c.food - food));
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestCountry = c;
+        }
+      });
+
+      document.getElementById("result").innerText =
+        "Your recommended destination is: " + bestCountry.name + "!";
+    });
   </script>
 </body>
 
